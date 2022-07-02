@@ -9,22 +9,26 @@ import java.util.UUID;
 public class TodoTest {
     public static void main(String[] args) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("ToDo");
-        EntityManager entityManager = factory.createEntityManager();
+        EntityManager entityManagerOne = factory.createEntityManager();
 
-        EntityTransaction transaction = entityManager.getTransaction();
+        EntityTransaction transactionOne = entityManagerOne.getTransaction();
 
-        transaction.begin();
-        entityManager.persist(new Todo(UUID.randomUUID(), "conduct JPA training"));
-        System.out.println("BEFORE FLUSH");
-        entityManager.flush();
-        System.out.println("AFTER FLUSH");
-        entityManager.persist(new Todo(UUID.randomUUID(), "conduct ORM training"));
-        entityManager.persist(new Todo(UUID.randomUUID(), "conduct Hibernate training"));
+        transactionOne.begin();
+        UUID todoIdOne = UUID.randomUUID();
+        entityManagerOne.persist(new Todo(todoIdOne, "conduct JPA training"));
+        entityManagerOne.persist(new Todo(UUID.randomUUID(), "conduct ORM training"));
+        entityManagerOne.persist(new Todo(UUID.randomUUID(), "conduct Hibernate training"));
 
-        System.out.println("BEFORE COMMIT");
-        transaction.commit();
+        Todo foundInPersistenceContext = entityManagerOne.find(Todo.class, todoIdOne);
+        System.out.println(foundInPersistenceContext);
+        transactionOne.commit();
+        entityManagerOne.close();
 
-        entityManager.close();
-        System.out.println(new Todo(UUID.randomUUID(), "conduct JPA training"));
+        EntityManager entityManagerTwo = factory.createEntityManager();
+
+        Todo found = entityManagerTwo.find(Todo.class, todoIdOne);
+        System.out.println(found);
+
+        entityManagerTwo.close();
     }
 }

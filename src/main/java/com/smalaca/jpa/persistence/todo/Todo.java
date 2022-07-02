@@ -14,6 +14,8 @@ public class Todo {
     private UUID id;
     private String subject;
 
+    private Todo() {}
+
     public Todo(UUID id, String subject) {
         this.id = id;
         this.subject = subject;
