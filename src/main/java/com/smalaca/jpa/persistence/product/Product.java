@@ -24,4 +24,8 @@ public class Product {
         this.id = id;
         this.name = name;
     }
+
+    void updateDescription(String description) {
+        this.description = description;
+    }
 }
