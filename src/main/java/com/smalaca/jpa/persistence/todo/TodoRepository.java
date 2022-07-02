@@ -21,4 +21,8 @@ public class TodoRepository {
     Todo findById(UUID id) {
         return entityManager.find(Todo.class, id);
     }
+
+    void close() {
+        entityManager.close();
+    }
 }

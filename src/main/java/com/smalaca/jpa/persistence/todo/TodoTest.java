@@ -8,22 +8,27 @@ public class TodoTest {
     private static final RepositoriesFactory REPOSITORIES_FACTORY = RepositoriesFactory.create();
 
     public static void main(String[] args) {
-//        EntityManager entityManager;
+        UUID todoIdOne = requestOne();
+        requestTwo(todoIdOne);
+
+        REPOSITORIES_FACTORY.close();
+    }
+
+    private static void requestTwo(UUID todoIdOne) {
+        TodoRepository todoRepositoryTwo = REPOSITORIES_FACTORY.toDoRepository();
+        Todo byId = todoRepositoryTwo.findById(todoIdOne);
+        todoRepositoryTwo.close();
+        System.out.println(byId);
+    }
+
+    private static UUID requestOne() {
         TodoRepository todoRepositoryOne = REPOSITORIES_FACTORY.toDoRepository();
         UUID todoIdOne = UUID.randomUUID();
         todoRepositoryOne.save(new Todo(todoIdOne, "conduct JPA training"));
         todoRepositoryOne.save(new Todo(UUID.randomUUID(), "conduct ORM training"));
-
-//        EntityTransaction transaction = entityManager.getTransaction();
-//        transaction.begin();
-//        entityManager.persist(new Todo(UUID.randomUUID(), "conduct Hibernate training"));
-//        transaction.commit();
         todoRepositoryOne.save(new Todo(UUID.randomUUID(), "conduct Hibernate training"));
 
-        TodoRepository todoRepositoryTwo = REPOSITORIES_FACTORY.toDoRepository();
-
-//        entityManager.find(Todo.class, todoIdOne)
-        Todo byId = todoRepositoryTwo.findById(todoIdOne);
-        System.out.println(byId);
+        todoRepositoryOne.close();
+        return todoIdOne;
     }
 }

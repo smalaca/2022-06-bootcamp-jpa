@@ -19,4 +19,8 @@ public class RepositoriesFactory {
     public TodoRepository toDoRepository() {
         return new TodoRepository(entityManagerFactory.createEntityManager());
     }
+
+    public void close() {
+        entityManagerFactory.close();
+    }
 }
