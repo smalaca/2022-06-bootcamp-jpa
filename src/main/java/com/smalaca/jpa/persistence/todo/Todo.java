@@ -21,8 +21,11 @@ public class Todo {
     @Column(name = "TODO_ID")
     private UUID id;
 
-    @Column(name = "SUBJECT")
+    @Column(name = "SUBJECT", unique = true, nullable = false)
     private String subject;
+
+    @Column(name = "DETAILS", columnDefinition = "CLOB")
+    private String details;
 
     @Transient
     private String firstLetterOfSubject;
