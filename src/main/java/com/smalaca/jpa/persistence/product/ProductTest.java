@@ -9,15 +9,24 @@ import java.util.UUID;
 public class ProductTest {
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ToDo");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManagerOne = entityManagerFactory.createEntityManager();
 
-        EntityTransaction transaction = entityManager.getTransaction();
+        EntityTransaction transaction = entityManagerOne.getTransaction();
         transaction.begin();
-        entityManager.persist(new Product(UUID.randomUUID(), "Tea"));
-        entityManager.persist(new Product(UUID.randomUUID(), "Coffee", "The best drink ever"));
-
+        UUID productIdOne = UUID.randomUUID();
+        entityManagerOne.persist(new Product(productIdOne, "Tea"));
+        UUID productIdTwo = UUID.randomUUID();
+        entityManagerOne.persist(new Product(productIdTwo, "Coffee", "The best drink ever"));
         transaction.commit();
 
-        entityManager.close();
+        entityManagerOne.close();
+
+        EntityManager entityManagerTwo = entityManagerFactory.createEntityManager();
+
+        System.out.println(entityManagerTwo.find(Product.class, productIdOne));
+        System.out.println(entityManagerTwo.find(Product.class, productIdTwo));
+        System.out.println(entityManagerTwo.find(Product.class, UUID.randomUUID()));
+
+        entityManagerTwo.close();
     }
 }

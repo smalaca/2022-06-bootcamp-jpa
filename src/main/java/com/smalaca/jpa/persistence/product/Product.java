@@ -14,6 +14,8 @@ public class Product {
     private String name;
     private String description;
 
+    private Product() {}
+
     public Product(UUID id, String name, String description) {
         this(id, name);
         this.description = description;
