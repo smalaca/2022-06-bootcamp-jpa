@@ -1,32 +1,27 @@
 package com.smalaca.jpa.persistence.product;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import com.smalaca.jpa.persistence.RepositoriesFactory;
+
 import java.util.UUID;
 
 public class ProductTest {
+
+    private static final RepositoriesFactory FACTORY = RepositoriesFactory.create();
+
     public static void main(String[] args) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ToDo");
-        EntityManager entityManagerOne = entityManagerFactory.createEntityManager();
+        ProductRepository productRepositoryOne = FACTORY.productRepository();
 
-        EntityTransaction transaction = entityManagerOne.getTransaction();
-        transaction.begin();
         UUID productIdOne = UUID.randomUUID();
-        entityManagerOne.persist(new Product(productIdOne, "Tea"));
+        productRepositoryOne.save(new Product(productIdOne, "Tea"));
         UUID productIdTwo = UUID.randomUUID();
-        entityManagerOne.persist(new Product(productIdTwo, "Coffee", "The best drink ever"));
-        transaction.commit();
+        productRepositoryOne.save(new Product(productIdTwo, "Coffee", "The best drink ever"));
 
-        entityManagerOne.close();
+        ProductRepository productRepositoryTwo = FACTORY.productRepository();
 
-        EntityManager entityManagerTwo = entityManagerFactory.createEntityManager();
+        System.out.println(productRepositoryTwo.findById(productIdOne));
+        System.out.println(productRepositoryTwo.findById(productIdTwo));
+        System.out.println(productRepositoryTwo.findById(UUID.randomUUID()));
 
-        System.out.println(entityManagerTwo.find(Product.class, productIdOne));
-        System.out.println(entityManagerTwo.find(Product.class, productIdTwo));
-        System.out.println(entityManagerTwo.find(Product.class, UUID.randomUUID()));
-
-        entityManagerTwo.close();
+        FACTORY.close();
     }
 }
