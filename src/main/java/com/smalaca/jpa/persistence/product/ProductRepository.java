@@ -26,4 +26,12 @@ public class ProductRepository {
     List<Product> findAll() {
         return entityManager.createQuery("SELECT p FROM Product p").getResultList();
     }
+
+    List<Product> findAllBy(String columnName) {
+        if ("name".equals(columnName) || "description".equals(columnName)) {
+            return entityManager.createQuery("SELECT p FROM Product p ORDER BY " + columnName).getResultList();
+        } else {
+            return entityManager.createQuery("SELECT p FROM Product p").getResultList();
+        }
+    }
 }
