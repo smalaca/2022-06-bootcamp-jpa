@@ -57,9 +57,13 @@ public class TodoTest {
     private static UUID createTodos() {
         TodoRepository repository = REPOSITORIES_FACTORY.toDoRepository();
         repository.save(new Todo("conduct ORM training"));
-        repository.save(new Todo("conduct Hibernate training"));
+        Todo defined = new Todo("conduct Hibernate training");
+        defined.defined();
+        repository.save(defined);
         repository.save(new Todo("conduct Refactoring training"));
-        repository.save(new Todo("conduct Testing training"));
+        Todo inProgress = new Todo("conduct Testing training");
+        inProgress.inProgress();
+        repository.save(inProgress);
         Todo todo = new Todo("conduct JPA training");
         return repository.save(todo);
     }

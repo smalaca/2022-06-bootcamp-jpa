@@ -5,6 +5,8 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PostLoad;
@@ -30,6 +32,9 @@ public class Todo {
     @Transient
     private String firstLetterOfSubject;
 
+    @Enumerated(EnumType.STRING)
+    private TodoStatus status = TodoStatus.NOT_DEFINED;
+
     private Todo() {}
 
     public Todo(String subject) {
@@ -48,5 +53,13 @@ public class Todo {
 
     UUID getId() {
         return id;
+    }
+
+    void defined() {
+        status = TodoStatus.DEFINED;
+    }
+
+    void inProgress() {
+        status = TodoStatus.IN_PROGRESS;
     }
 }
