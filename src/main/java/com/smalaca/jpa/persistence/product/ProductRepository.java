@@ -34,4 +34,11 @@ public class ProductRepository {
             return entityManager.createQuery("SELECT p FROM Product p").getResultList();
         }
     }
+
+    void deleteById(UUID id) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(findById(id));
+        transaction.commit();
+    }
 }

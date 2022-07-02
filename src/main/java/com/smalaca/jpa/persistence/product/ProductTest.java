@@ -11,10 +11,23 @@ public class ProductTest {
 
     public static void main(String[] args) {
         UUID productIdOne = createProducts();
+        System.out.println("----------------");
+
         findOneProduct(productIdOne);
+        System.out.println("----------------");
+
+        findAllProducts();
+        System.out.println("----------------");
+
+        deleteOneProduct(productIdOne);
+        System.out.println("----------------");
         findAllProducts();
 
         FACTORY.close();
+    }
+
+    private static void deleteOneProduct(UUID id) {
+        FACTORY.productRepository().deleteById(id);
     }
 
     private static void findAllProducts() {
