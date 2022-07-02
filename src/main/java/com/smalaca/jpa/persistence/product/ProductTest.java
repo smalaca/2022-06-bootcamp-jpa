@@ -5,39 +5,37 @@ import com.smalaca.jpa.persistence.RepositoriesFactory;
 import java.util.List;
 
 public class ProductTest {
-    private static final long PRODUCT_ID = 1L;
-
     private static final RepositoriesFactory FACTORY = RepositoriesFactory.create();
 
     public static void main(String[] args) {
-        createProducts();
+        Long id = createProducts();
         System.out.println("----------------");
 
-        findOneProduct();
+        findOneProduct(id);
         System.out.println("----------------");
 
-        updateOneProduct();
+        updateOneProduct(id);
         System.out.println("----------------");
 
         findAllProducts();
         System.out.println("----------------");
 
-        deleteOneProduct();
+        deleteOneProduct(id);
         System.out.println("----------------");
         findAllProducts();
 
         FACTORY.close();
     }
 
-    private static void updateOneProduct() {
+    private static void updateOneProduct(Long id) {
         ProductRepository repository = FACTORY.productRepository();
-        Product product = repository.findById(PRODUCT_ID);
+        Product product = repository.findById(id);
         product.updateDescription("You can drink that in many ways");
         repository.update(product);
     }
 
-    private static void deleteOneProduct() {
-        FACTORY.productRepository().deleteById(PRODUCT_ID);
+    private static void deleteOneProduct(Long id) {
+        FACTORY.productRepository().deleteById(id);
     }
 
     private static void findAllProducts() {
@@ -45,17 +43,17 @@ public class ProductTest {
         products.forEach(System.out::println);
     }
 
-    private static void findOneProduct() {
+    private static void findOneProduct(Long id) {
         ProductRepository productRepositoryTwo = FACTORY.productRepository();
-        System.out.println(productRepositoryTwo.findById(PRODUCT_ID));
+        System.out.println(productRepositoryTwo.findById(id));
         System.out.println(productRepositoryTwo.findById(13L));
     }
 
-    private static void createProducts() {
+    private static Long createProducts() {
         ProductRepository productRepositoryOne = FACTORY.productRepository();
-        productRepositoryOne.save(new Product(PRODUCT_ID, "Tea"));
-        productRepositoryOne.save(new Product(2L, "Coffee", "The best drink ever"));
-        productRepositoryOne.save(new Product(3L, "Water", "Perfect for hot days. It does not matter if this is a weekend or not."));
-        productRepositoryOne.save(new Product(4L, "Milk"));
+        productRepositoryOne.save(new Product("Coffee", "The best drink ever"));
+        productRepositoryOne.save(new Product("Water", "Perfect for hot days. It does not matter if this is a weekend or not."));
+        productRepositoryOne.save(new Product("Milk"));
+        return productRepositoryOne.save(new Product("Tea"));
     }
 }

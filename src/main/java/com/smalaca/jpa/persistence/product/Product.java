@@ -3,6 +3,7 @@ package com.smalaca.jpa.persistence.product;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PostLoad;
 import javax.persistence.Transient;
@@ -11,6 +12,7 @@ import javax.persistence.Transient;
 @ToString
 public class Product {
     @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String description;
@@ -19,13 +21,12 @@ public class Product {
 
     private Product() {}
 
-    public Product(Long id, String name, String description) {
-        this(id, name);
+    public Product(String name, String description) {
+        this(name);
         updateDescription(description);
     }
 
-    public Product(Long id, String name) {
-        this.id = id;
+    public Product(String name) {
         this.name = name;
     }
 
@@ -41,5 +42,9 @@ public class Product {
         } else {
             shortDescription = description;
         }
+    }
+
+    Long getId() {
+        return id;
     }
 }

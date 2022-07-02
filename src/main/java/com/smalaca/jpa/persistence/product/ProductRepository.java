@@ -15,11 +15,13 @@ public class ProductRepository {
         return entityManager.find(Product.class, id);
     }
 
-    void save(Product product) {
+    Long save(Product product) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.persist(product);
         transaction.commit();
+
+        return product.getId();
     }
 
     List<Product> findAll() {
