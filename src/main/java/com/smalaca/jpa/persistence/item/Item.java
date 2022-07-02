@@ -30,4 +30,15 @@ public class Item {
                     column = @Column(name = "ITEM_DESC"))
     })
     private Description description;
+
+    private Item() {}
+
+    Item(String name, Description description) {
+        this(name);
+        this.description = description;
+    }
+
+    public Item(String name) {
+        this.name = name;
+    }
 }

@@ -1,5 +1,6 @@
 package com.smalaca.jpa.persistence;
 
+import com.smalaca.jpa.persistence.item.ItemRepository;
 import com.smalaca.jpa.persistence.todo.TodoRepository;
 
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +13,10 @@ public class RepositoriesFactory {
         this.entityManagerFactory = entityManagerFactory;
     }
 
+    public void close() {
+        entityManagerFactory.close();
+    }
+
     public static RepositoriesFactory create() {
         return new RepositoriesFactory(Persistence.createEntityManagerFactory("ToDo"));
     }
@@ -20,7 +25,7 @@ public class RepositoriesFactory {
         return new TodoRepository(entityManagerFactory.createEntityManager());
     }
 
-    public void close() {
-        entityManagerFactory.close();
+    public ItemRepository itemRepository() {
+        return new ItemRepository(entityManagerFactory.createEntityManager());
     }
 }
