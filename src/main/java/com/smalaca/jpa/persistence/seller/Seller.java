@@ -3,6 +3,9 @@ package com.smalaca.jpa.persistence.seller;
 import com.smalaca.jpa.persistence.contactdetails.ContactDetails;
 import lombok.ToString;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +19,10 @@ public class Seller {
     private Long id;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "phone", column = @Column(name = "SELLER_PHONE")),
+            @AttributeOverride(name = "mail", column = @Column(name = "SELLER_MAIL"))
+    })
     private ContactDetails contactDetails;
 
     private Seller() {}
