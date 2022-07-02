@@ -2,6 +2,7 @@ package com.smalaca.jpa.persistence.product;
 
 import com.smalaca.jpa.persistence.RepositoriesFactory;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductTest {
@@ -51,9 +52,9 @@ public class ProductTest {
 
     private static Long createProducts() {
         ProductRepository productRepositoryOne = FACTORY.productRepository();
-        productRepositoryOne.save(new Product("Coffee", "The best drink ever"));
-        productRepositoryOne.save(new Product("Water", "Perfect for hot days. It does not matter if this is a weekend or not."));
-        productRepositoryOne.save(new Product("Milk"));
-        return productRepositoryOne.save(new Product("Tea"));
+        productRepositoryOne.save(new Product("Coffee", BigDecimal.valueOf(13), "The best drink ever"));
+        productRepositoryOne.save(new Product("Water", BigDecimal.valueOf(12.98), "Perfect for hot days. It does not matter if this is a weekend or not."));
+        productRepositoryOne.save(new Product("Milk", BigDecimal.valueOf(42)));
+        return productRepositoryOne.save(new Product("Tea", BigDecimal.valueOf(123.45)));
     }
 }
