@@ -3,31 +3,30 @@ package com.smalaca.jpa.persistence.product;
 import com.smalaca.jpa.persistence.RepositoriesFactory;
 
 import java.util.List;
-import java.util.UUID;
 
 public class ProductTest {
 
     private static final RepositoriesFactory FACTORY = RepositoriesFactory.create();
 
     public static void main(String[] args) {
-        UUID productIdOne = createProducts();
+        createProducts();
         System.out.println("----------------");
 
-        findOneProduct(productIdOne);
+        findOneProduct();
         System.out.println("----------------");
 
         findAllProducts();
         System.out.println("----------------");
 
-        deleteOneProduct(productIdOne);
+        deleteOneProduct();
         System.out.println("----------------");
         findAllProducts();
 
         FACTORY.close();
     }
 
-    private static void deleteOneProduct(UUID id) {
-        FACTORY.productRepository().deleteById(id);
+    private static void deleteOneProduct() {
+        FACTORY.productRepository().deleteById(1L);
     }
 
     private static void findAllProducts() {
@@ -35,19 +34,17 @@ public class ProductTest {
         products.forEach(System.out::println);
     }
 
-    private static void findOneProduct(UUID productIdOne) {
+    private static void findOneProduct() {
         ProductRepository productRepositoryTwo = FACTORY.productRepository();
-        System.out.println(productRepositoryTwo.findById(productIdOne));
-        System.out.println(productRepositoryTwo.findById(UUID.randomUUID()));
+        System.out.println(productRepositoryTwo.findById(1L));
+        System.out.println(productRepositoryTwo.findById(13L));
     }
 
-    private static UUID createProducts() {
+    private static void createProducts() {
         ProductRepository productRepositoryOne = FACTORY.productRepository();
-        UUID productIdOne = UUID.randomUUID();
-        productRepositoryOne.save(new Product(productIdOne, "Tea"));
-        productRepositoryOne.save(new Product(UUID.randomUUID(), "Coffee", "The best drink ever"));
-        productRepositoryOne.save(new Product(UUID.randomUUID(), "Water", "Perfect for hot days"));
-        productRepositoryOne.save(new Product(UUID.randomUUID(), "Milk"));
-        return productIdOne;
+        productRepositoryOne.save(new Product(1L, "Tea"));
+        productRepositoryOne.save(new Product(2L, "Coffee", "The best drink ever"));
+        productRepositoryOne.save(new Product(3L, "Water", "Perfect for hot days"));
+        productRepositoryOne.save(new Product(4L, "Milk"));
     }
 }

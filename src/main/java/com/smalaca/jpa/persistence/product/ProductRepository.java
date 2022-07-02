@@ -3,7 +3,6 @@ package com.smalaca.jpa.persistence.product;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
-import java.util.UUID;
 
 public class ProductRepository {
     private final EntityManager entityManager;
@@ -12,7 +11,7 @@ public class ProductRepository {
         this.entityManager = entityManager;
     }
 
-    Product findById(UUID id) {
+    Product findById(Long id) {
         return entityManager.find(Product.class, id);
     }
 
@@ -35,10 +34,11 @@ public class ProductRepository {
         }
     }
 
-    void deleteById(UUID id) {
+    void deleteById(Long id) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.remove(findById(id));
+        entityManager.createQuery("DELETE FROM Product WHERE id = '" + id + "'").executeUpdate();
+//        entityManager.remove(findById(id));
         transaction.commit();
     }
 }

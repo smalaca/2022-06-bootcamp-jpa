@@ -4,24 +4,23 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.UUID;
 
 @Entity
 @ToString
 public class Product {
     @Id
-    private UUID id;
+    private Long id;
     private String name;
     private String description;
 
     private Product() {}
 
-    public Product(UUID id, String name, String description) {
+    public Product(Long id, String name, String description) {
         this(id, name);
         this.description = description;
     }
 
-    public Product(UUID id, String name) {
+    public Product(Long id, String name) {
         this.id = id;
         this.name = name;
     }
