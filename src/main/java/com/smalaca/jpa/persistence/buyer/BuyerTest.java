@@ -1,6 +1,7 @@
 package com.smalaca.jpa.persistence.buyer;
 
 import com.smalaca.jpa.persistence.RepositoriesFactory;
+import com.smalaca.jpa.persistence.contactdetails.ContactDetails;
 
 public class BuyerTest {
     private static final RepositoriesFactory FACTORY = RepositoriesFactory.create();

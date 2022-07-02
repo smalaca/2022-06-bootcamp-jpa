@@ -1,4 +1,4 @@
-package com.smalaca.jpa.persistence.buyer;
+package com.smalaca.jpa.persistence.contactdetails;
 
 import lombok.ToString;
 

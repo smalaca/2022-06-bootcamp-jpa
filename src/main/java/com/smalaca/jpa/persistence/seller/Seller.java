@@ -1,4 +1,4 @@
-package com.smalaca.jpa.persistence.buyer;
+package com.smalaca.jpa.persistence.seller;
 
 import com.smalaca.jpa.persistence.contactdetails.ContactDetails;
 import lombok.ToString;
@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @ToString
 @Entity
-public class Buyer {
+public class Seller {
     @Id
     @GeneratedValue
     private Long id;
@@ -18,9 +18,9 @@ public class Buyer {
     @Embedded
     private ContactDetails contactDetails;
 
-    private Buyer() {}
+    private Seller() {}
 
-    Buyer(ContactDetails contactDetails) {
+    Seller(ContactDetails contactDetails) {
         this.contactDetails = contactDetails;
     }
 

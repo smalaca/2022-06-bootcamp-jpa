@@ -3,6 +3,7 @@ package com.smalaca.jpa.persistence;
 import com.smalaca.jpa.persistence.buyer.BuyerRepository;
 import com.smalaca.jpa.persistence.invoice.InvoiceRepository;
 import com.smalaca.jpa.persistence.product.ProductRepository;
+import com.smalaca.jpa.persistence.seller.SellerRepository;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -32,5 +33,9 @@ public class RepositoriesFactory {
 
     public BuyerRepository buyerRepository() {
         return new BuyerRepository(entityManagerFactory.createEntityManager());
+    }
+
+    public SellerRepository sellerRepository() {
+        return new SellerRepository(entityManagerFactory.createEntityManager());
     }
 }
