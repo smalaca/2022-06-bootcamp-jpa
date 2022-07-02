@@ -1,4 +1,4 @@
-package com.smalaca.jpa.persistence.todo;
+package com.smalaca.jpa.persistence.description;
 
 import lombok.ToString;
 
@@ -12,7 +12,7 @@ public class Description {
 
     private Description() {}
 
-    Description(String shortDescription, String longDescription) {
+    public Description(String shortDescription, String longDescription) {
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
     }

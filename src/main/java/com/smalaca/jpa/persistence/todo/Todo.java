@@ -1,8 +1,11 @@
 package com.smalaca.jpa.persistence.todo;
 
 
+import com.smalaca.jpa.persistence.description.Description;
 import lombok.ToString;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -31,6 +34,14 @@ public class Todo {
     private String details;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(
+                    name = "shortDescription",
+                    column = @Column(name = "TODO_SHORT_DESC")),
+            @AttributeOverride(
+                    name = "longDescription",
+                    column = @Column(name = "TODO_DESC"))
+    })
     private Description description;
 
     @Transient

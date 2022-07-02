@@ -1,6 +1,7 @@
 package com.smalaca.jpa.persistence.todo;
 
 import com.smalaca.jpa.persistence.RepositoriesFactory;
+import com.smalaca.jpa.persistence.description.Description;
 
 import java.util.List;
 import java.util.UUID;
