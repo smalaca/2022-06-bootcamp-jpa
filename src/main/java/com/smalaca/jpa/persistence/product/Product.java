@@ -2,20 +2,29 @@ package com.smalaca.jpa.persistence.product;
 
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PostLoad;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @ToString
+@Table(name = "PRODUCTS")
 public class Product {
     @Id
     @GeneratedValue
+    @Column(name = "PRODUCT_ID")
     private Long id;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "DESC")
     private String description;
+
     @Transient
     private String shortDescription;
 
