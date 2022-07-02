@@ -15,6 +15,9 @@ public class TodoTest {
         findOneTodo(todoIdOne);
         System.out.println("---------------------");
 
+        modifyOneTodo(todoIdOne);
+        System.out.println("---------------------");
+
         findAllTodos();
         System.out.println("---------------------");
 
@@ -25,6 +28,13 @@ public class TodoTest {
         System.out.println("---------------------");
 
         REPOSITORIES_FACTORY.close();
+    }
+
+    private static void modifyOneTodo(UUID id) {
+        TodoRepository repository = REPOSITORIES_FACTORY.toDoRepository();
+        Todo todo = repository.findById(id);
+        todo.changeSubjectTo("Prepare exercises for JPA training");
+        repository.update(todo);
     }
 
     private static void deleteOneTodo(UUID id) {

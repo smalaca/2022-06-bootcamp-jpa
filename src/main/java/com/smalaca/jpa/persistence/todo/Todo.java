@@ -23,4 +23,8 @@ public class Todo {
         this.id = id;
         this.subject = subject;
     }
+
+    void changeSubjectTo(String subject) {
+        this.subject = subject;
+    }
 }

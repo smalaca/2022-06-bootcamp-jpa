@@ -35,4 +35,11 @@ public class TodoRepository {
         return entityManager.createQuery(
                 "SELECT t FROM Todo t WHERE t.subject !='' ORDER BY subject ASC").getResultList();
     }
+
+    void update(Todo todo) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.merge(todo);
+        transaction.commit();
+    }
 }
