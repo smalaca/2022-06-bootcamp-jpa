@@ -23,6 +23,14 @@ public class TodoRepository {
         return entityManager.find(Todo.class, id);
     }
 
+    void deleteById(UUID id) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        Todo todoToRemove = findById(id);
+        entityManager.remove(todoToRemove);
+        transaction.commit();
+    }
+
     List<Todo> findAll() {
         return entityManager.createQuery(
                 "SELECT t FROM Todo t WHERE t.subject !='' ORDER BY subject ASC").getResultList();

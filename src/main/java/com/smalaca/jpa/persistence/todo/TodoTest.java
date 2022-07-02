@@ -10,10 +10,26 @@ public class TodoTest {
 
     public static void main(String[] args) {
         UUID todoIdOne = createTodos();
+        System.out.println("---------------------");
+
         findOneTodo(todoIdOne);
+        System.out.println("---------------------");
+
         findAllTodos();
+        System.out.println("---------------------");
+
+        deleteOneTodo(todoIdOne);
+        System.out.println("---------------------");
+
+        findAllTodos();
+        System.out.println("---------------------");
 
         REPOSITORIES_FACTORY.close();
+    }
+
+    private static void deleteOneTodo(UUID id) {
+        TodoRepository repository = REPOSITORIES_FACTORY.toDoRepository();
+        repository.deleteById(id);
     }
 
     private static void findAllTodos() {
@@ -34,6 +50,8 @@ public class TodoTest {
         repository.save(new Todo(todoIdOne, "conduct JPA training"));
         repository.save(new Todo(UUID.randomUUID(), "conduct ORM training"));
         repository.save(new Todo(UUID.randomUUID(), "conduct Hibernate training"));
+        repository.save(new Todo(UUID.randomUUID(), "conduct Refactoring training"));
+        repository.save(new Todo(UUID.randomUUID(), "conduct Testing training"));
         return todoIdOne;
     }
 
