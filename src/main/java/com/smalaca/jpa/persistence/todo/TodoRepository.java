@@ -2,6 +2,7 @@ package com.smalaca.jpa.persistence.todo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 import java.util.UUID;
 
 public class TodoRepository {
@@ -22,7 +23,8 @@ public class TodoRepository {
         return entityManager.find(Todo.class, id);
     }
 
-    void close() {
-        entityManager.close();
+    List<Todo> findAll() {
+        return entityManager.createQuery(
+                "SELECT t FROM Todo t WHERE t.subject !='' ORDER BY subject ASC").getResultList();
     }
 }
