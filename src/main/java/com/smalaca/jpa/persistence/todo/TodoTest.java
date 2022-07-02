@@ -56,13 +56,12 @@ public class TodoTest {
 
     private static UUID createTodos() {
         TodoRepository repository = REPOSITORIES_FACTORY.toDoRepository();
-        UUID todoIdOne = UUID.randomUUID();
-        repository.save(new Todo(todoIdOne, "conduct JPA training"));
-        repository.save(new Todo(UUID.randomUUID(), "conduct ORM training"));
-        repository.save(new Todo(UUID.randomUUID(), "conduct Hibernate training"));
-        repository.save(new Todo(UUID.randomUUID(), "conduct Refactoring training"));
-        repository.save(new Todo(UUID.randomUUID(), "conduct Testing training"));
-        return todoIdOne;
+        repository.save(new Todo("conduct ORM training"));
+        repository.save(new Todo("conduct Hibernate training"));
+        repository.save(new Todo("conduct Refactoring training"));
+        repository.save(new Todo("conduct Testing training"));
+        Todo todo = new Todo("conduct JPA training");
+        return repository.save(todo);
     }
 
 }
