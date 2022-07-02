@@ -55,7 +55,7 @@ public class ProductTest {
         ProductRepository productRepositoryOne = FACTORY.productRepository();
         productRepositoryOne.save(new Product(PRODUCT_ID, "Tea"));
         productRepositoryOne.save(new Product(2L, "Coffee", "The best drink ever"));
-        productRepositoryOne.save(new Product(3L, "Water", "Perfect for hot days"));
+        productRepositoryOne.save(new Product(3L, "Water", "Perfect for hot days. It does not matter if this is a weekend or not."));
         productRepositoryOne.save(new Product(4L, "Milk"));
     }
 }
