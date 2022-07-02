@@ -4,6 +4,7 @@ package com.smalaca.jpa.persistence.todo;
 import lombok.ToString;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,6 +29,9 @@ public class Todo {
 
     @Column(name = "DETAILS", columnDefinition = "CLOB")
     private String details;
+
+    @Embedded
+    private Description description;
 
     @Transient
     private String firstLetterOfSubject;
@@ -61,5 +65,9 @@ public class Todo {
 
     void inProgress() {
         status = TodoStatus.IN_PROGRESS;
+    }
+
+    void set(Description description) {
+        this.description = description;
     }
 }
