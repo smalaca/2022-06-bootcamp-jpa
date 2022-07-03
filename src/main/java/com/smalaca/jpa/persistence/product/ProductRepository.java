@@ -24,6 +24,12 @@ public class ProductRepository {
         return product.getId();
     }
 
+    List<Product> findAllProductsWithCategories() {
+        return entityManager
+                .createQuery("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.categories")
+                .getResultList();
+    }
+
     List<Product> findAll() {
         return entityManager.createQuery("SELECT p FROM Product p").getResultList();
     }

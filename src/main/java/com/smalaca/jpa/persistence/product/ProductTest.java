@@ -23,7 +23,11 @@ public class ProductTest {
 
         deleteOneProduct(id);
         System.out.println("----------------");
+
         findAllProducts();
+        System.out.println("----------------");
+
+        findAllProductsWithCategories();
 
         FACTORY.close();
     }
@@ -41,6 +45,11 @@ public class ProductTest {
 
     private static void findAllProducts() {
         List<Product> products = FACTORY.productRepository().findAll();
+        products.forEach(System.out::println);
+    }
+
+    private static void findAllProductsWithCategories() {
+        List<Product> products = FACTORY.productRepository().findAllProductsWithCategories();
         products.forEach(System.out::println);
     }
 
