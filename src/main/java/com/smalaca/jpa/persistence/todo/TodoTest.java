@@ -89,6 +89,10 @@ public class TodoTest {
         todoWithTags.addTag("COLD", "the best for hot times");
         repository.save(todoWithTags);
 
+        Todo toDoWithCategory = new Todo("to do with category");
+        toDoWithCategory.add(new TodoCategory("BOOK", "item use for fun or to learn"));
+        repository.save(toDoWithCategory);
+
         return repository.save(new Todo("conduct JPA training"));
     }
 
