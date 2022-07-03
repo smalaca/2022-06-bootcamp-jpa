@@ -42,6 +42,7 @@ public class AuthorTest {
 
         Author gamora = new Author("gamora");
         gamora.add(new Address("Krakowska 13/2", "Warszawa", "22-345", "Polska"));
+        gamora.add(new Address("Floriańska 13/2", "Warszawa", "22-345", "Polska"));
         authorRepository.save(gamora);
 
         Author drax = new Author("drax");
