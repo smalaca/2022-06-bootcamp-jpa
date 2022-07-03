@@ -8,7 +8,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -81,8 +80,8 @@ public class Todo {
     // BOOK;item use for fun or to learn
     // COMIC_BOOK;item used for fun
     // DRINK;good when you want to drink
+//    @Convert(converter = TodoCategoryConverter.class)
     @Column(name = "TODO_CATEGORY", columnDefinition = "varchar(100)")
-    @Convert(converter = TodoCategoryConverter.class)
     private TodoCategory category;
 
     private Todo() {}

@@ -1,7 +1,9 @@
 package com.smalaca.jpa.persistence.todo;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
+@Converter(autoApply = true)
 public class TodoCategoryConverter implements AttributeConverter<TodoCategory, String> {
     @Override
     public String convertToDatabaseColumn(TodoCategory todoCategory) {
