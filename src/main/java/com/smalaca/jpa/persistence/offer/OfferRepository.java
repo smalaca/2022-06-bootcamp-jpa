@@ -10,13 +10,13 @@ public class OfferRepository {
         this.entityManager = entityManager;
     }
 
-    void save(Offer offer) {
+    public void save(Offer offer) {
         entityManager.getTransaction().begin();
         entityManager.persist(offer);
         entityManager.getTransaction().commit();
     }
 
-    List<Offer> findAll() {
+    public List<Offer> findAll() {
         return entityManager.createQuery("SELECT i FROM Offer i").getResultList();
     }
 }

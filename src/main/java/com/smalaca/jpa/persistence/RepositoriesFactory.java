@@ -3,8 +3,9 @@ package com.smalaca.jpa.persistence;
 import com.smalaca.jpa.persistence.basket.BasketRepository;
 import com.smalaca.jpa.persistence.buyer.BuyerRepository;
 import com.smalaca.jpa.persistence.invoice.InvoiceRepository;
-import com.smalaca.jpa.persistence.offer.OfferRepository;
 import com.smalaca.jpa.persistence.invoiceitem.InvoiceItemRepository;
+import com.smalaca.jpa.persistence.offer.OfferRepository;
+import com.smalaca.jpa.persistence.offeritem.OfferItemRepository;
 import com.smalaca.jpa.persistence.product.ProductRepository;
 import com.smalaca.jpa.persistence.seller.SellerRepository;
 
@@ -50,7 +51,11 @@ public class RepositoriesFactory {
         return new OfferRepository(entityManagerFactory.createEntityManager());
     }
 
-    public InvoiceItemRepository offerItemRepository() {
+    public InvoiceItemRepository invoiceItemRepository() {
         return new InvoiceItemRepository(entityManagerFactory.createEntityManager());
+    }
+
+    public OfferItemRepository offerItemRepository() {
+        return new OfferItemRepository(entityManagerFactory.createEntityManager());
     }
 }

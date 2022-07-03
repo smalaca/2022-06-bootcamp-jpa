@@ -29,7 +29,7 @@ public class InvoiceItemTest {
     }
 
     private static void findAllInvoiceItems() {
-        InvoiceItemRepository repository = FACTORY.offerItemRepository();
+        InvoiceItemRepository repository = FACTORY.invoiceItemRepository();
         List<InvoiceItem> found = repository.findAll();
         System.out.println("SIZE OF INVOICE ITEMS: " + found.size());
         found.forEach(System.out::println);
@@ -44,7 +44,7 @@ public class InvoiceItemTest {
         Product coffee = new Product("Coffee", BigDecimal.valueOf(123));
         productRepositoryOne.save(coffee);
 
-        InvoiceItemRepository invoiceItemRepositoryOne = FACTORY.offerItemRepository();
+        InvoiceItemRepository invoiceItemRepositoryOne = FACTORY.invoiceItemRepository();
         InvoiceItem invoiceItem = new InvoiceItem();
         invoiceItemRepositoryOne.save(invoiceItem);
         InvoiceItem invoiceItemForTea = new InvoiceItem(tea, 1);
@@ -56,7 +56,7 @@ public class InvoiceItemTest {
         productRepositoryOne.close();
 
         ProductRepository productRepositoryTwo = FACTORY.productRepository();
-        InvoiceItemRepository invoiceItemRepositoryTwo = FACTORY.offerItemRepository();
+        InvoiceItemRepository invoiceItemRepositoryTwo = FACTORY.invoiceItemRepository();
 
         invoiceItemRepositoryTwo.deleteById(invoiceItemForWater.getId());
         invoiceItemRepositoryTwo.deleteById(invoiceItem.getId());
