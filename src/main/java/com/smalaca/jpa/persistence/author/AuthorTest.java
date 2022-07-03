@@ -10,7 +10,8 @@ public class AuthorTest {
     private static final RepositoriesFactory FACTORY = RepositoriesFactory.create();
 
     public static void main(String[] args) {
-        addAll();
+//        addAllWithTodos();
+        addAllWithAddresses();
 
         System.out.println("-------------------");
         findAllAuthors();
@@ -33,7 +34,21 @@ public class AuthorTest {
         items.forEach(System.out::println);
     }
 
-    private static void addAll() {
+    private static void addAllWithAddresses() {
+        AuthorRepository authorRepository = FACTORY.authorRepository();
+        Author peterParker = new Author("peter parker");
+        peterParker.add(new Address("Krakowska 3/2", "Kraków", "12-345", "Polska"));
+        authorRepository.save(peterParker);
+
+        Author gamora = new Author("gamora");
+        gamora.add(new Address("Krakowska 13/2", "Warszawa", "22-345", "Polska"));
+        authorRepository.save(gamora);
+
+        Author drax = new Author("drax");
+        authorRepository.save(drax);
+    }
+
+    private static void addAllWithTodos() {
         AuthorRepository authorRepository = FACTORY.authorRepository();
         Author peterParker = new Author("peter parker");
         authorRepository.save(peterParker);
