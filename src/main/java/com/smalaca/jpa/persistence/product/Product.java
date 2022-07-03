@@ -2,9 +2,12 @@ package com.smalaca.jpa.persistence.product;
 
 import lombok.ToString;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -44,6 +47,16 @@ public class Product {
     @Column(name = "CATEGORY")
     private Set<String> categories = new HashSet<>();
 
+    @ElementCollection
+    @CollectionTable(name = "RATINGS")
+    @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(name = "login", column = @Column(nullable = false)),
+            @AttributeOverride(name = "value", column = @Column(name = "rating_value", nullable = false)),
+            @AttributeOverride(name = "explanation", column = @Column(name = "rating_expl")),
+    })
+    private Set<Rating> ratings = new HashSet<>();
+
     private Product() {}
 
     public Product(String name, BigDecimal price, String description) {
@@ -77,5 +90,9 @@ public class Product {
 
     void addCategory(String category) {
         categories.add(category);
+    }
+
+    void add(Rating rating) {
+        ratings.add(rating);
     }
 }

@@ -71,6 +71,12 @@ public class ProductTest {
         productWithCategories.addCategory("Spider-Man");
         repository.save(productWithCategories);
 
+        Product productWithRatings = new Product("Defenders Comic Book #42", BigDecimal.valueOf(42.12));
+        productWithRatings.add(new Rating("calor danvers", 9));
+        productWithRatings.add(new Rating("mary-jane watson", 10, "the greatest ever"));
+        productWithRatings.add(new Rating("gwen stacy", 7, "not so bad"));
+        repository.save(productWithRatings);
+
         return repository.save(new Product("Tea", BigDecimal.valueOf(123.45)));
     }
 }
