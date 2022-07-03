@@ -62,8 +62,8 @@ public class Todo {
             joinColumns = {
                     @JoinColumn(name = "TODO_ID")
             })
-    @Column(name = "COMMENT", columnDefinition = "CLOB")
-    private Set<String> comments = new HashSet<>();
+    @Embedded
+    private Set<Comment> comments = new HashSet<>();
 
     private Todo() {}
 
@@ -97,7 +97,7 @@ public class Todo {
         this.description = description;
     }
 
-    void addComment(String comment) {
+    void addComment(Comment comment) {
         comments.add(comment);
     }
 }
