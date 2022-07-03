@@ -45,16 +45,23 @@ public class ProductTest {
     }
 
     private static void findOneProduct(Long id) {
-        ProductRepository productRepositoryTwo = FACTORY.productRepository();
-        System.out.println(productRepositoryTwo.findById(id));
-        System.out.println(productRepositoryTwo.findById(13L));
+        ProductRepository repository = FACTORY.productRepository();
+        System.out.println(repository.findById(id));
+        System.out.println(repository.findById(13L));
     }
 
     private static Long createProducts() {
-        ProductRepository productRepositoryOne = FACTORY.productRepository();
-        productRepositoryOne.save(new Product("Coffee", BigDecimal.valueOf(13), "The best drink ever"));
-        productRepositoryOne.save(new Product("Water", BigDecimal.valueOf(12.98), "Perfect for hot days. It does not matter if this is a weekend or not."));
-        productRepositoryOne.save(new Product("Milk", BigDecimal.valueOf(42)));
-        return productRepositoryOne.save(new Product("Tea", BigDecimal.valueOf(123.45)));
+        ProductRepository repository = FACTORY.productRepository();
+        repository.save(new Product("Coffee", BigDecimal.valueOf(13), "The best drink ever"));
+        repository.save(new Product("Water", BigDecimal.valueOf(12.98), "Perfect for hot days. It does not matter if this is a weekend or not."));
+        repository.save(new Product("Milk", BigDecimal.valueOf(42)));
+
+        Product productWithCategories = new Product("Spider-Man Comic Book #13", BigDecimal.valueOf(13.22));
+        productWithCategories.addCategory("Reading");
+        productWithCategories.addCategory("Comic Book");
+        productWithCategories.addCategory("Spider-Man");
+        repository.save(productWithCategories);
+
+        return repository.save(new Product("Tea", BigDecimal.valueOf(123.45)));
     }
 }

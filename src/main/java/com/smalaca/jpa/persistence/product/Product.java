@@ -2,7 +2,9 @@ package com.smalaca.jpa.persistence.product;
 
 import lombok.ToString;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +12,8 @@ import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @ToString
@@ -34,6 +38,11 @@ public class Product {
 
     @Transient
     private String shortDescription;
+
+    @ElementCollection
+    @CollectionTable(name = "CATEGORIES")
+    @Column(name = "CATEGORY")
+    private Set<String> categories = new HashSet<>();
 
     private Product() {}
 
@@ -64,5 +73,9 @@ public class Product {
 
     Long getId() {
         return id;
+    }
+
+    void addCategory(String category) {
+        categories.add(category);
     }
 }
