@@ -32,6 +32,20 @@ public class JpaListener {
         productRepository.save(new Product("Mirinda", "Pepsi", "drink", 43));
 
         productRepository.findAll().forEach(System.out::println);
+        System.out.println("PEPSI");
+        productRepository.findAllByManufacturer("Pepsi").forEach(System.out::println);
+        System.out.println("COLA");
+        productRepository.findAllByManufacturer("CocaCola").forEach(System.out::println);
+        System.out.println("Not existing manufacturer");
+        productRepository.findAllByManufacturer("NA").forEach(System.out::println);
+
+        System.out.println("not existing product");
+        System.out.println(productRepository.findOneByName("NA").isEmpty());
+        System.out.println("7UP");
+        System.out.println(productRepository.findOneByName("7UP").get());
+
+        System.out.println("by price");
+        productRepository.findAllByPriceBetween(40, 90).forEach(System.out::println);
     }
 
     private void addresses() {
