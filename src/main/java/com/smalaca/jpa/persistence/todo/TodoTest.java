@@ -3,6 +3,7 @@ package com.smalaca.jpa.persistence.todo;
 import com.smalaca.jpa.persistence.RepositoriesFactory;
 import com.smalaca.jpa.persistence.description.Description;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -74,9 +75,12 @@ public class TodoTest {
         repository.save(inProgress);
 
         Todo toDoWithComments = new Todo("to do with comments");
-        toDoWithComments.addComment(Comment.now("steve roger", "great thing to do"));
-        toDoWithComments.addComment(Comment.now("peter parker", "something for later"));
-        toDoWithComments.addComment(Comment.now("carol danvers", "I won't do it anyway"));
+        toDoWithComments.addComment(
+                new Comment("steve roger", LocalDate.now(), "great thing to do"));
+        toDoWithComments.addComment(
+                new Comment("peter parker", LocalDate.now(), "something for later"));
+        toDoWithComments.addComment(
+                new Comment("carol danvers", LocalDate.now(), "I won't do it anyway"));
         repository.save(toDoWithComments);
 
         return repository.save(new Todo("conduct JPA training"));

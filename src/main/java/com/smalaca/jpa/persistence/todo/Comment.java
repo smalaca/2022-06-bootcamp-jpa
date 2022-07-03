@@ -14,13 +14,9 @@ public class Comment {
 
     private Comment() {}
 
-    private Comment(String author, LocalDate date, String comment) {
+    public Comment(String author, LocalDate date, String comment) {
         this.author = author;
         this.date = date;
         this.comment = comment;
-    }
-
-    static Comment now(String author, String comment) {
-        return new Comment(author, LocalDate.now(), comment);
     }
 }
