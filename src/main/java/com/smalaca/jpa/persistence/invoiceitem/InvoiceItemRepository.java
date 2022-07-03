@@ -11,13 +11,13 @@ public class InvoiceItemRepository {
         this.entityManager = entityManager;
     }
 
-    void save(InvoiceItem invoiceItem) {
+    public void save(InvoiceItem invoiceItem) {
         entityManager.getTransaction().begin();
         entityManager.persist(invoiceItem);
         entityManager.getTransaction().commit();
     }
 
-    List<InvoiceItem> findAll() {
+    public List<InvoiceItem> findAll() {
         return entityManager.createQuery("SELECT i FROM InvoiceItem i").getResultList();
     }
 
