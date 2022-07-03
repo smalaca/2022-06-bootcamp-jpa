@@ -1,5 +1,6 @@
 package com.smalaca.jpa.persistence;
 
+import com.smalaca.jpa.persistence.author.AuthorRepository;
 import com.smalaca.jpa.persistence.item.ItemRepository;
 import com.smalaca.jpa.persistence.todo.TodoRepository;
 
@@ -27,5 +28,9 @@ public class RepositoriesFactory {
 
     public ItemRepository itemRepository() {
         return new ItemRepository(entityManagerFactory.createEntityManager());
+    }
+
+    public AuthorRepository authorRepository() {
+        return new AuthorRepository(entityManagerFactory.createEntityManager());
     }
 }

@@ -12,7 +12,7 @@ public class TodoRepository {
         this.entityManager = entityManager;
     }
 
-    UUID save(Todo todo) {
+    public UUID save(Todo todo) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.persist(todo);
@@ -32,7 +32,7 @@ public class TodoRepository {
         transaction.commit();
     }
 
-    List<Todo> findAll() {
+    public List<Todo> findAll() {
         return entityManager.createQuery(
                 "SELECT t FROM Todo t WHERE t.subject !='' ORDER BY subject ASC").getResultList();
     }

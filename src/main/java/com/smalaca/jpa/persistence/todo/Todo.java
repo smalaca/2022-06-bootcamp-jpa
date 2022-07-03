@@ -1,6 +1,7 @@
 package com.smalaca.jpa.persistence.todo;
 
 
+import com.smalaca.jpa.persistence.author.Author;
 import com.smalaca.jpa.persistence.description.Description;
 import lombok.ToString;
 
@@ -18,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -84,6 +86,10 @@ public class Todo {
     @Column(name = "TODO_CATEGORY", columnDefinition = "varchar(100)")
     private TodoCategory category;
 
+    @OneToOne
+    @JoinColumn(name = "AUTH_ID")
+    private Author author;
+
     private Todo() {}
 
     public Todo(String subject) {
@@ -126,5 +132,9 @@ public class Todo {
 
     void add(TodoCategory category) {
         this.category = category;
+    }
+
+    public void add(Author author) {
+        this.author = author;
     }
 }
