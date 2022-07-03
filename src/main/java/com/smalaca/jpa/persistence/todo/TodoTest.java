@@ -83,6 +83,12 @@ public class TodoTest {
                 new Comment("carol danvers", LocalDate.now(), "I won't do it anyway"));
         repository.save(toDoWithComments);
 
+        Todo todoWithTags = new Todo("item with tags");
+        todoWithTags.addTag("CHEAP", "something that do not cost too much");
+        todoWithTags.addTag("NICE", "something cute");
+        todoWithTags.addTag("COLD", "the best for hot times");
+        repository.save(todoWithTags);
+
         return repository.save(new Todo("conduct JPA training"));
     }
 
