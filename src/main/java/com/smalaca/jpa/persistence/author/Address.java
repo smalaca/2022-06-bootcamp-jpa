@@ -1,14 +1,13 @@
 package com.smalaca.jpa.persistence.author;
 
-import lombok.ToString;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.UUID;
 
 @Entity
-@ToString
 public class Address {
     @Id
     @GeneratedValue
@@ -18,6 +17,10 @@ public class Address {
     private String postalCode;
     private String country;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_OF_AUTHOR")
+    private Author author;
+
     public Address(String street, String city, String postalCode, String country) {
         this.street = street;
         this.city = city;
@@ -26,4 +29,16 @@ public class Address {
     }
 
     private Address() {}
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", country='" + country + '\'' +
+                ", author=" + (author == null ? "NULL" : author.getName()) +
+                '}';
+    }
 }
