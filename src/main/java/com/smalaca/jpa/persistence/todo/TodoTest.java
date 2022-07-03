@@ -47,6 +47,8 @@ public class TodoTest {
         TodoRepository repository = REPOSITORIES_FACTORY.toDoRepository();
         List<Todo> todos = repository.findAll();
         todos.forEach(System.out::println);
+
+        repository.close();
     }
 
     private static void findOneTodo(UUID todoIdOne) {

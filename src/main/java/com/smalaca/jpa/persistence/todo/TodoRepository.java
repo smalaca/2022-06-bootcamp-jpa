@@ -43,4 +43,8 @@ public class TodoRepository {
         entityManager.merge(todo);
         transaction.commit();
     }
+
+    void close() {
+        entityManager.close();
+    }
 }
