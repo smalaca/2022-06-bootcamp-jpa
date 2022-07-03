@@ -13,8 +13,10 @@ public class InvoiceItemTest {
 
     public static void main(String[] args) {
         createAll();
+        System.out.println("--------------");
         findAllProducts();
-        findAllOfferItems();
+        System.out.println("--------------");
+        findAllInvoiceItems();
 
         FACTORY.close();
     }
@@ -22,30 +24,43 @@ public class InvoiceItemTest {
     private static void findAllProducts() {
         ProductRepository repository = FACTORY.productRepository();
         List<Product> found = repository.findAll();
+        System.out.println("SIZE OF PRODUCTS: " + found.size());
         found.forEach(System.out::println);
     }
 
-    private static void findAllOfferItems() {
+    private static void findAllInvoiceItems() {
         InvoiceItemRepository repository = FACTORY.offerItemRepository();
         List<InvoiceItem> found = repository.findAll();
+        System.out.println("SIZE OF INVOICE ITEMS: " + found.size());
         found.forEach(System.out::println);
     }
 
     private static void createAll() {
-        ProductRepository productRepository = FACTORY.productRepository();
+        ProductRepository productRepositoryOne = FACTORY.productRepository();
         Product water = new Product("Water", BigDecimal.valueOf(123));
-        productRepository.save(water);
+        productRepositoryOne.save(water);
         Product tea = new Product("Tea", BigDecimal.valueOf(123));
-        productRepository.save(tea);
+        productRepositoryOne.save(tea);
         Product coffee = new Product("Coffee", BigDecimal.valueOf(123));
-        productRepository.save(coffee);
+        productRepositoryOne.save(coffee);
 
-        InvoiceItemRepository invoiceItemRepository = FACTORY.offerItemRepository();
+        InvoiceItemRepository invoiceItemRepositoryOne = FACTORY.offerItemRepository();
         InvoiceItem invoiceItem = new InvoiceItem();
-        invoiceItemRepository.save(invoiceItem);
+        invoiceItemRepositoryOne.save(invoiceItem);
         InvoiceItem invoiceItemForTea = new InvoiceItem(tea, 1);
-        invoiceItemRepository.save(invoiceItemForTea);
+        invoiceItemRepositoryOne.save(invoiceItemForTea);
         InvoiceItem invoiceItemForWater = new InvoiceItem(water, 1);
-        invoiceItemRepository.save(invoiceItemForWater);
+        invoiceItemRepositoryOne.save(invoiceItemForWater);
+
+        invoiceItemRepositoryOne.close();
+        productRepositoryOne.close();
+
+        ProductRepository productRepositoryTwo = FACTORY.productRepository();
+        InvoiceItemRepository invoiceItemRepositoryTwo = FACTORY.offerItemRepository();
+
+        invoiceItemRepositoryTwo.deleteById(invoiceItemForWater.getId());
+        invoiceItemRepositoryTwo.deleteById(invoiceItem.getId());
+        productRepositoryTwo.deleteById(coffee.getId());
+//        productRepositoryTwo.deleteById(tea.getId());
     }
 }

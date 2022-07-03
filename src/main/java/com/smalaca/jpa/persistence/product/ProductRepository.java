@@ -42,7 +42,7 @@ public class ProductRepository {
         }
     }
 
-    void deleteById(Long id) {
+    public void deleteById(Long id) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.createQuery("DELETE FROM Product WHERE id = '" + id + "'").executeUpdate();
@@ -55,5 +55,9 @@ public class ProductRepository {
         transaction.begin();
         entityManager.merge(product);
         transaction.commit();
+    }
+
+    public void close() {
+        entityManager.close();
     }
 }

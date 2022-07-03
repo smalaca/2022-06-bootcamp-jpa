@@ -1,20 +1,21 @@
 package com.smalaca.jpa.persistence.invoiceitem;
 
 import com.smalaca.jpa.persistence.product.Product;
+import lombok.Getter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import java.util.UUID;
 
 @Entity
 @ToString
 public class InvoiceItem {
     @Id
     @GeneratedValue
-    private UUID id;
+    @Getter
+    private Long id;
 
     @OneToOne
     private Product product;

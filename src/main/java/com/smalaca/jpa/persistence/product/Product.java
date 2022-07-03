@@ -84,7 +84,7 @@ public class Product {
         }
     }
 
-    Long getId() {
+    public Long getId() {
         return id;
     }
 

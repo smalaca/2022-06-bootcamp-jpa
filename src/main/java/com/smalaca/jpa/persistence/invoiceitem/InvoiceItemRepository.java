@@ -27,4 +27,8 @@ public class InvoiceItemRepository {
         entityManager.remove(entityManager.find(InvoiceItem.class, id));
         transaction.commit();
     }
+
+    void close() {
+        entityManager.close();
+    }
 }
