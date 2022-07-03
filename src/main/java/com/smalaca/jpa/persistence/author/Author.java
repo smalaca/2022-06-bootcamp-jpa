@@ -21,11 +21,6 @@ public class Author {
     private String name;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "author")
-//    @JoinTable(
-//            name = "ADDRESSES_OF_AUTHOR",
-//            joinColumns = {@JoinColumn(name = "AUTH_ID")},
-//            inverseJoinColumns = {@JoinColumn(name = "ADD_ID")}
-//    )
     private Set<Address> addresses = new HashSet<>();
 
     private Author() {}
@@ -40,5 +35,6 @@ public class Author {
 
     void add(Address address) {
         addresses.add(address);
+        address.assignTo(this);
     }
 }

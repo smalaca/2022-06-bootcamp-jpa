@@ -19,6 +19,11 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "ID_OF_AUTHOR")
+//    @JoinTable(
+//            name = "ADDRESSES_OF_AUTHOR",
+//            joinColumns = {@JoinColumn(name = "ADD_ID")},
+//            inverseJoinColumns = {@JoinColumn(name = "AUTH_ID")}
+//    )
     private Author author;
 
     public Address(String street, String city, String postalCode, String country) {
@@ -40,5 +45,9 @@ public class Address {
                 ", country='" + country + '\'' +
                 ", author=" + (author == null ? "NULL" : author.getName()) +
                 '}';
+    }
+
+    void assignTo(Author author) {
+        this.author = author;
     }
 }
