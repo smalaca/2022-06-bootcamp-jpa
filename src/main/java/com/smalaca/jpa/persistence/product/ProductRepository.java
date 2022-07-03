@@ -15,7 +15,7 @@ public class ProductRepository {
         return entityManager.find(Product.class, id);
     }
 
-    Long save(Product product) {
+    public Long save(Product product) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.persist(product);
@@ -30,7 +30,7 @@ public class ProductRepository {
                 .getResultList();
     }
 
-    List<Product> findAll() {
+    public List<Product> findAll() {
         return entityManager.createQuery("SELECT p FROM Product p").getResultList();
     }
 
