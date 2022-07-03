@@ -6,16 +6,21 @@ import lombok.ToString;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -50,6 +55,15 @@ public class Todo {
     @Enumerated(EnumType.STRING)
     private TodoStatus status = TodoStatus.NOT_DEFINED;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "TODO_COMMENTS",
+            joinColumns = {
+                    @JoinColumn(name = "TODO_ID")
+            })
+    @Column(name = "COMMENT", columnDefinition = "CLOB")
+    private Set<String> comments = new HashSet<>();
+
     private Todo() {}
 
     public Todo(String subject) {
@@ -80,5 +94,9 @@ public class Todo {
 
     void set(Description description) {
         this.description = description;
+    }
+
+    void addComment(String comment) {
+        comments.add(comment);
     }
 }

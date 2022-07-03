@@ -71,6 +71,12 @@ public class TodoTest {
         inProgress.inProgress();
         repository.save(inProgress);
 
+        Todo toDoWithComments = new Todo("to do with comments");
+        toDoWithComments.addComment("great thing to do");
+        toDoWithComments.addComment("something for later");
+        toDoWithComments.addComment("I won't do it anyway");
+        repository.save(toDoWithComments);
+
         return repository.save(new Todo("conduct JPA training"));
     }
 
