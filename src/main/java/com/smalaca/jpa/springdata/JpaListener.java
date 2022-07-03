@@ -20,7 +20,7 @@ public class JpaListener {
         addressRepository.save(new Address("Krakowska 3/2", "12345", "Kraków", "Polska"));
         addressRepository.save(new Address("Floriańska 13/42", "12345", "Kraków", "Polska"));
         addressRepository.save(new Address("Krakowska 67", "43212", "Warszawa", "Polska"));
-        addressRepository.save(new Address("Krakowska 67", "43212", "Warszawa", "Polska"));
+        addressRepository.save(new Address("Krakowska 63", "43212", "Warszawa", "Polska"));
         addressRepository.save(new Address("Lubicz 7/7", "12345", "Kraków", "Polska"));
         addressRepository.save(new Address("Lubicz 7/7", "12345", "Gdynia", "Polska"));
 
@@ -34,6 +34,8 @@ public class JpaListener {
         addressRepository.findAllByCity("Gdynia").forEach(System.out::println);
         System.out.println("---- FIND FOR WARSZAWA OR LUBICZ 7/7 ----");
         addressRepository.findAllByCityOrStreet("Warszawa", "Lubicz 7/7").forEach(System.out::println);
+        System.out.println("---- FIND FOR WARSZAWA AND Krakowska 63 ----");
+        addressRepository.findAllByCityAndStreet("Warszawa", "Krakowska 63").forEach(System.out::println);
         System.out.println("---- KONIEC ----");
     }
 }
