@@ -41,8 +41,11 @@ public class InvoiceItemTest {
         productRepository.save(coffee);
 
         InvoiceItemRepository invoiceItemRepository = FACTORY.offerItemRepository();
-        invoiceItemRepository.save(new InvoiceItem(coffee, 13));
-        invoiceItemRepository.save(new InvoiceItem(tea, 1));
-        invoiceItemRepository.save(new InvoiceItem(water, 1));
+        InvoiceItem invoiceItem = new InvoiceItem();
+        invoiceItemRepository.save(invoiceItem);
+        InvoiceItem invoiceItemForTea = new InvoiceItem(tea, 1);
+        invoiceItemRepository.save(invoiceItemForTea);
+        InvoiceItem invoiceItemForWater = new InvoiceItem(water, 1);
+        invoiceItemRepository.save(invoiceItemForWater);
     }
 }

@@ -1,8 +1,6 @@
 package com.smalaca.jpa.persistence.invoiceitem;
 
 import com.smalaca.jpa.persistence.product.Product;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
@@ -13,7 +11,6 @@ import java.util.UUID;
 
 @Entity
 @ToString
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class InvoiceItem {
     @Id
     @GeneratedValue
@@ -27,4 +24,6 @@ public class InvoiceItem {
         this.product = product;
         this.amount = amount;
     }
+
+    public InvoiceItem() {}
 }

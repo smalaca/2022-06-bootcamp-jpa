@@ -1,6 +1,7 @@
 package com.smalaca.jpa.persistence.invoiceitem;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class InvoiceItemRepository {
@@ -18,5 +19,12 @@ public class InvoiceItemRepository {
 
     List<InvoiceItem> findAll() {
         return entityManager.createQuery("SELECT i FROM InvoiceItem i").getResultList();
+    }
+
+    void deleteById(Long id) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(entityManager.find(InvoiceItem.class, id));
+        transaction.commit();
     }
 }
