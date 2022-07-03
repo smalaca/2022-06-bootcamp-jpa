@@ -34,5 +34,9 @@ public class BasketTest {
 
         Basket basketThree = new Basket();
         basketRepository.save(basketThree);
+
+        Basket basketWithIdentifier = new Basket();
+        basketWithIdentifier.add(BasketIdentifier.now("natasha romanoff", 13));
+        basketRepository.save(basketWithIdentifier);
     }
 }
